@@ -22,6 +22,7 @@ module.exports = async (req, res, next) => {
           req.admin = {
             userName,
             password,
+            id: admin.id,
           };
 
           next();
