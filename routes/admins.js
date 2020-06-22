@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const { genSalt } = require("bcryptjs");
-const { query, validationResult } = require("express-validator");
+const { check, validationResult } = require("express-validator");
 
 const authAdmin = require("../middleWare/authAdmin");
 const Admin = require("../models/Admin");
@@ -12,21 +12,21 @@ router.post(
   "/",
   [
     authAdmin,
-    query(
+    check(
       "adminPassword",
       "Password length should be greater than 6"
     ).isLength({ min: 6 }),
-    query("newAdmin", "Please add a username").not().isEmpty(),
+    check("newAdmin", "Please add a username").not().isEmpty(),
   ],
   async (req, res) => {
-    //authAdmin middleware first authenticates user express validator validates input
+    //authAdmin middleware first authenticates user then express validator validates input
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       //checks for any errors in input
       return res.status(400).json({ errors: errors.array() });
     }
-    const newAdmin = req.query.newAdmin; //username for new admin
-    const adminPassword = req.query.adminPassword; //password for new admin
+    const newAdmin = req.body.newAdmin; //username for new admin
+    const adminPassword = req.body.adminPassword; //password for new admin
 
     try {
       //check if username already exists
@@ -59,8 +59,8 @@ router.post(
 //Restricted
 router.put("/", authAdmin, async (req, res) => {
   //authAdmin middleware first authenticates user
-  const newUsername = req.query.newUsername; //new username for admin
-  const newPassword = req.query.newPassword; //new password for admin
+  const newUsername = req.body.newUsername; //new username for admin
+  const newPassword = req.body.newPassword; //new password for admin
 
   try {
     //check if username already exists

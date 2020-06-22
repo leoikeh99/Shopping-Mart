@@ -12,6 +12,7 @@ const ProductSchema = mongoose.Schema({
   },
   subCategories: {
     type: [String],
+    default: "none",
   },
   stockCount: {
     type: Number,
