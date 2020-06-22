@@ -3,13 +3,12 @@ const bcrypt = require("bcryptjs");
 
 //This middleware authenticates an admin
 module.exports = async (req, res, next) => {
-  if (!req.body.userName && !req.body.password) {
-    //checks if user req.body data is available
+  if (!req.query.userName && !req.query.password) {
     res.status(401).json({ msg: "Unauthorized" });
   } else {
     try {
-      const userName = req.body.userName;
-      const password = req.body.password;
+      const userName = req.query.userName;
+      const password = req.query.password;
 
       //checks for admin username
       let admin = await Admin.findOne({ userName });
