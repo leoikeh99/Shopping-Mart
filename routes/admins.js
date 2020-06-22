@@ -19,8 +19,10 @@ router.post(
     query("newAdmin", "Please add a username").not().isEmpty(),
   ],
   async (req, res) => {
+    //authAdmin middleware first authenticates user express validator validates input
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      //checks for any errors in input
       return res.status(400).json({ errors: errors.array() });
     }
     const newAdmin = req.query.newAdmin; //username for new admin
@@ -38,12 +40,14 @@ router.post(
         userName: newAdmin,
         password: adminPassword,
       });
+
+      //hash password with bycrypt
       const salt = await bcrypt.genSalt(10);
       admin.password = await bcrypt.hash(admin.password, salt);
 
       await admin.save(); //save admin
-      let response = await Admin.findOne({ userName: newAdmin });
-      res.json(response);
+      let response = await Admin.findOne({ userName: newAdmin }); //finds new admin that was just saved
+      res.json(response); //returns new admin
     } catch (err) {
       console.error(err);
       res.status(500).send("Server error");
@@ -54,10 +58,7 @@ router.post(
 //Update admins
 //Restricted
 router.put("/", authAdmin, async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
+  //authAdmin middleware first authenticates user
   const newUsername = req.query.newUsername; //new username for admin
   const newPassword = req.query.newPassword; //new password for admin
 
@@ -71,17 +72,19 @@ router.put("/", authAdmin, async (req, res) => {
       return res.status(400).json({ msg: "Username already exists" });
     }
 
+    //set update details
     let updateDetails = {};
     if (newUsername) updateDetails.userName = newUsername;
     if (newPassword) updateDetails.password = newPassword;
 
+    //Only hash new password if new password is inputed
     if (newPassword) {
-      //Only hash password if there is a newPassword
       const salt = await bcrypt.genSalt(10);
       updateDetails.password = await bcrypt.hash(updateDetails.password, salt);
     }
 
     let update = await Admin.findByIdAndUpdate(
+      //updates admin details
       req.admin.id,
       { $set: updateDetails },
       { new: true }
@@ -97,8 +100,9 @@ router.put("/", authAdmin, async (req, res) => {
 // delete an admin
 //Restricted
 router.delete("/", authAdmin, async (req, res) => {
+  //authAdmin middleware first authenticates user
   try {
-    let admin = await Admin.findByIdAndRemove(req.admin.id);
+    let admin = await Admin.findByIdAndRemove(req.admin.id); //deletes admin
     res.json({ msg: "Your admin rights have been anulled" });
   } catch (err) {
     console.error(err);
@@ -109,9 +113,10 @@ router.delete("/", authAdmin, async (req, res) => {
 // Get all admins
 //Restricted
 router.get("/", authAdmin, async (req, res) => {
+  //authAdmin middleware first authenticates user
   try {
-    let adminUsers = await Admin.find({});
-    const adminUsernames = adminUsers.map((adminUser) => adminUser.userName);
+    let adminUsers = await Admin.find({}); //gets all admins
+    const adminUsernames = adminUsers.map((adminUser) => adminUser.userName); //returns all admin usernames
     res.json({ users: adminUsernames });
   } catch (err) {
     console.error(err);
