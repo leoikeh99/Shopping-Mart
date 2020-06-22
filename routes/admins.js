@@ -94,4 +94,29 @@ router.put("/", authAdmin, async (req, res) => {
   }
 });
 
+// delete an admin
+//Restricted
+router.delete("/", authAdmin, async (req, res) => {
+  try {
+    let admin = await Admin.findByIdAndRemove(req.admin.id);
+    res.json({ msg: "Your admin rights have been anulled" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server error");
+  }
+});
+
+// Get all admins
+//Restricted
+router.get("/", authAdmin, async (req, res) => {
+  try {
+    let adminUsers = await Admin.find({});
+    const adminUsernames = adminUsers.map((adminUser) => adminUser.userName);
+    res.json({ users: adminUsernames });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server error");
+  }
+});
+
 module.exports = router;

@@ -6,15 +6,11 @@ const app = express();
 //connect to mongo
 connectDB();
 
-//set ejs view engine
-app.set("view engine", "ejs"); //ignore this for now i only want to setup a frontend so we could populate the db
-app.use(express.static("./public")); //and this
-
 //Middleware
 app.use(express.json({ extended: false }));
 
 app.get("/", (req, res) => {
-  res.render("populate");
+  res.json({ msg: "Welcome" });
 });
 
 //Routes
