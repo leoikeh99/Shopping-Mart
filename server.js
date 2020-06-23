@@ -13,7 +13,7 @@ app.set("view engine", "ejs");
 app.use(express.static("./public"));
 
 app.get("/", (req, res) => {
-  res.json({ msg: "populate" });
+  res.render("populate");
 });
 
 //Routes
