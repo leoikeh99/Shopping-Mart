@@ -1,0 +1,12 @@
+body {
+  margin: 0;
+}
+
+.container {
+  width: 90%;
+  margin: auto;
+}
+
+nav {
+  padding: 5px 0px;
+}
