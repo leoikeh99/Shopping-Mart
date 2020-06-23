@@ -22,18 +22,5 @@ $("form").submit((e) => {
   if (subCategories) data.subCategories = subCategories;
   if (desc) data.desc = desc;
 
-  //   $.ajax({
-  //     type: "GET",
-  //     headers: {
-  //       "Access-Control-Allow-Origin": "http://localhost:5500/",
-  //     },
-  //     url: "https://shopping-mart-app.herokuapp.com/api/products",
-  //     crossDomain: true,
-  //     sucess: (data) => {
-  //       console.log(data);
-  //     },
-  //     error: (xhr) => {
-  //       console.log("status: ", xhr.status, " Error message: ", xhr.responseText);
-  //     },
-  //   });
+   
 });
