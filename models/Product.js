@@ -6,6 +6,10 @@ const ProductSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  price: {
+    type: Number,
+    required: true,
+  },
   category: {
     type: String,
     required: true,
@@ -20,7 +24,7 @@ const ProductSchema = mongoose.Schema({
   },
   image: {
     type: String,
-    required: true,
+    default: "https://image.flaticon.com/icons/png/512/14/14611.png",
   },
   desc: {
     type: String,
