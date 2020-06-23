@@ -20,6 +20,6 @@ app.get("/", (req, res) => {
 app.use("/api/products", require("./routes/products"));
 app.use("/api/admins", require("./routes/admins"));
 
-const PORT = 5500 || process.env.PORT;
+const PORT = process.env.PORT || 5500;
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
