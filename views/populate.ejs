@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/assets/style.css" />
     <link rel="stylesheet" href="/assets/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/style.css" />
     <title>API DOC</title>
   </head>
   <body>
@@ -13,5 +13,135 @@
         <h1>API DOCUMENTAION</h1>
       </div>
     </nav>
+
+    <main>
+      <div class="container">
+        <section class="product border">
+          <h2 class="bg-primary border p-1">Poducts API</h2>
+          <p class="bg-secondary p-1 m-1 text-dark font-weight-bold">
+            URL: https://shopping-mart-app.herokuapp.com/api/products
+          </p>
+          <h3 class="text-dark m-1 mt-3 text-center">MODEL</h3>
+          <table class="table table-hover table-striped">
+            <thead class="bg-primary text-white">
+              <tr>
+                <th scope="col">Signature</th>
+                <th scope="col">Type</th>
+                <th scope="col">Reqiured ?</th>
+                <th scope="col">Default ?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">name</th>
+                <td>String</td>
+                <td>Yes</td>
+                <td>No default</td>
+              </tr>
+              <tr>
+                <th scope="row">category</th>
+                <td>String</td>
+                <td>Yes</td>
+                <td>No default</td>
+              </tr>
+              <tr>
+                <th scope="row">image</th>
+                <td>String</td>
+                <td>No</td>
+                <td>No image URL</td>
+              </tr>
+              <tr>
+                <th scope="row">subCategory</th>
+                <td>String</td>
+                <td>No</td>
+                <td>Empty array</td>
+              </tr>
+              <tr>
+                <th scope="row">desc</th>
+                <td>String</td>
+                <td>No</td>
+                <td>"No description"</td>
+              </tr>
+              <tr>
+                <th scope="row">stockCount</th>
+                <td>Number</td>
+                <td>No</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <th scope="row">price</th>
+                <td>Number</td>
+                <td>Yes</td>
+                <td>No default</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="card border-primary m-2">
+            <h3 class="card-header bg-primary">
+              POST REQUEST
+            </h3>
+            <div class="p-1">
+              <p class="bg-secondary p-1 m-1 text-dark font-weight-bold">
+                URL:
+                https://shopping-mart-app.herokuapp.com/api/products?userName=yourUsername&password=yourPassword
+              </p>
+              <p class="text-dark m-1 font-weight-bold">Data Sample:</p>
+              <img src="assets/img/productPost.png" alt="" />
+            </div>
+          </div>
+          <div class="card border-primary m-2">
+            <h4 class="card-header bg-primary">Populate Our database</h4>
+            <div class="card-body">
+              <form action="" class="text-dark font-weight-bold">
+                <label for="">Name of product:</label>
+                <input type="text" class="form-control" id="name" />
+                <div class="mt-2"></div>
+                <label for="">Category of product:</label>
+                <input type="text" class="form-control" id="category" />
+                <div class="mt-2"></div>
+                <label for="">Image URL:</label>
+                <input type="text" class="form-control" id="image" />
+                <div class="mt-2"></div>
+                <label for="">Sub categories(use commas to split):</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="subCategories"
+                  placeholder="e.g. kitchenware,foodware,..."
+                />
+                <div class="mt-2"></div>
+                <label for="">Description of product:</label>
+                <input type="text" class="form-control" id="desc" />
+                <div class="mt-2"></div>
+                <label for="">Stock Count:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="stockCount"
+                  placeholder="Can be any number"
+                />
+                <div class="mt-2"></div>
+                <label for="">Price:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="price"
+                  placeholder="Just a number"
+                />
+                <input
+                  type="submit"
+                  id="post"
+                  class="bg-primary form-control mt-2 text-white"
+                  value="ADD PRODUCT"
+                />
+              </form>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="assets/populate.js"></script>
   </body>
 </html>

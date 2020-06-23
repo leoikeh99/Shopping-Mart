@@ -10,6 +10,11 @@ const Product = require("../models/Product");
 router.get("/", async (req, res) => {
   try {
     const products = await Product.find({});
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
     res.json(products);
   } catch (error) {
     console.error(err.message);
@@ -66,6 +71,11 @@ router.post(
       });
 
       const product = await newProduct.save();
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept"
+      );
       res.json(product);
     } catch (err) {
       console.error(err.message);
@@ -106,6 +116,11 @@ router.put("/:id", authAdmin, async (req, res) => {
       { $set: productDetails },
       { new: true }
     );
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
     res.json(product);
   } catch (err) {
     console.error(err.message);
@@ -121,6 +136,11 @@ router.delete("/:id", authAdmin, async (req, res) => {
     if (!product) return res.status(404).json({ msg: "Product not found" });
 
     product = await Product.findByIdAndRemove(req.params.id);
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
     res.json({ msg: "Product deleted" });
   } catch (error) {
     console.error(err.message);
