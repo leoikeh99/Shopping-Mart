@@ -120,11 +120,7 @@ router.delete("/", authAdmin, async (req, res) => {
   //authAdmin middleware first authenticates user
   try {
     let admin = await Admin.findByIdAndRemove(req.admin.id); //deletes admin
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
+
     res.json({ msg: "Your admin rights have been anulled" });
   } catch (err) {
     console.error(err);
@@ -139,11 +135,7 @@ router.get("/", authAdmin, async (req, res) => {
   try {
     let adminUsers = await Admin.find({}); //gets all admins
     const adminUsernames = adminUsers.map((adminUser) => adminUser.userName); //returns all admin usernames
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
+
     res.json({ users: adminUsernames });
   } catch (err) {
     console.error(err);
