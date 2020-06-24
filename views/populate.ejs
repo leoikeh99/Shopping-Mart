@@ -94,11 +94,32 @@
             <h4 class="card-header bg-primary">Populate Our database</h4>
             <div class="card-body">
               <form action="" class="text-dark font-weight-bold">
+                <label for="">Username</label>
+                <input
+                  type="text"
+                  id="username"
+                  class="form-control"
+                  required
+                />
+                <div class="mt-2"></div>
+                <label for="">Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  required
+                  class="form-control"
+                />
+                <div class="mt-2"></div>
                 <label for="">Name of product:</label>
-                <input type="text" class="form-control" id="name" />
+                <input type="text" class="form-control" id="name" required />
                 <div class="mt-2"></div>
                 <label for="">Category of product:</label>
-                <input type="text" class="form-control" id="category" />
+                <input
+                  type="text"
+                  class="form-control"
+                  id="category"
+                  required
+                />
                 <div class="mt-2"></div>
                 <label for="">Image URL:</label>
                 <input type="text" class="form-control" id="image" />
@@ -116,7 +137,7 @@
                 <div class="mt-2"></div>
                 <label for="">Stock Count:</label>
                 <input
-                  type="text"
+                  type="number"
                   class="form-control"
                   id="stockCount"
                   placeholder="Can be any number"
@@ -124,15 +145,20 @@
                 <div class="mt-2"></div>
                 <label for="">Price:</label>
                 <input
-                  type="text"
-                  class="form-control"
+                  type="number"
+                  class="form-control mb-1"
                   id="price"
                   placeholder="Just a number"
+                  required
                 />
+                <div class="center">
+                  <img id="spinner" src="assets/img/spinner.gif" alt="" />
+                </div>
+                <div class="response"></div>
                 <input
                   type="submit"
                   id="post"
-                  class="bg-primary form-control mt-2 text-white"
+                  class="bg-primary form-control mt-1 text-white"
                   value="ADD PRODUCT"
                 />
               </form>
