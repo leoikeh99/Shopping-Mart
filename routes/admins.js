@@ -47,11 +47,7 @@ router.post(
 
       await admin.save(); //save admin
       let response = await Admin.findOne({ userName: newAdmin }); //finds new admin that was just saved
-      res.header("Access-Control-Allow-Origin", "*");
-      res.header(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept"
-      );
+
       res.json(response); //returns new admin
     } catch (err) {
       console.error(err);
@@ -109,11 +105,7 @@ router.put(
         { $set: updateDetails },
         { new: true }
       );
-      res.header("Access-Control-Allow-Origin", "*");
-      res.header(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept"
-      );
+
       res.json(update);
     } catch (err) {
       console.error(err);
