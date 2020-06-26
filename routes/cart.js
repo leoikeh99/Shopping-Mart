@@ -15,6 +15,8 @@ const {
   findByIdAndRemove,
 } = require("../models/Cart");
 
+//Add an item to cart
+//Private
 router.post("/", authUser, async (req, res) => {
   try {
     const product = await Product.findOne({ _id: req.params.id });
@@ -51,6 +53,8 @@ router.post("/", authUser, async (req, res) => {
   }
 });
 
+//Get users cart
+//Private
 router.get("/", authUser, async (req, res) => {
   try {
     const cart = await Cart.find({ user: req.user.id });
