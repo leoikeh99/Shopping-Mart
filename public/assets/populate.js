@@ -61,4 +61,48 @@ $(document).ready(() => {
       },
     });
   });
+
+  var output = "";
+
+  $.ajax({
+    type: "GET",
+    url: "/api/products",
+    success: (data) => {
+      document.getElementById("amount").textContent = `${data.length}`;
+
+      data.forEach((item) => {
+        var sub = "";
+        if (item.subCategories.length === 1) {
+          sub += item.subCategories[0];
+        } else if (item.subCategories.length === 0) {
+          sub += "None";
+        } else {
+          item.subCategories.forEach((subCategory) =>
+            item.subCategories.indexOf(subCategory) ===
+            item.subCategories.length - 1
+              ? (sub += "")
+              : (sub += subCategory + ",")
+          );
+          sub += item.subCategories[item.subCategories.length - 1];
+        }
+
+        output += `
+           <div class="item p-2 bg-primary  text-dark">
+           <h4>${item.name}</h4>
+           <ul>
+           <li><span class="font-weight-bolder">Category:</span> ${item.category}</li>
+           <li><span class="font-weight-bolder">Image URL:</span> ${item.image}</li>
+           <li><span class="font-weight-bolder">Sub categories:</span> ${sub}.</li>
+           <li><span class="font-weight-bolder">Description:</span> ${item.desc}</li>
+           <li><span class="font-weight-bolder">Stock Count:</span> ${item.stockCount}</li>
+           <li><span class="font-weight-bolder">Price:</span> ${item.price}</li> 
+         </ul>
+         </div>
+         `;
+      });
+
+      $("#items").html(output);
+    },
+    error: (xhr) => {},
+  });
 });
